@@ -1,0 +1,118 @@
+@extends('layouts.admin')
+@section('title') Sales - Categories @endsection
+@section('homePage') {{ auth()->user()->company_name }} @endsection
+@section('homeLink') Store @endsection
+@section('homeLinkActive') Home @endsection
+@section('links')
+    <button class="btn btn-sm btn-primary"><a href="{{ route('store.create') }}"><span class="btn-title">Add New Repository</span><i class="fa fa-plus text-light"></i></a></button>
+    <button class="btn btn-sm btn-primary"><a href="{{ route('store.settings') }}"><span class="btn-title">Stores Settings</span><i class="fa fa-home text-light"></i></a></button>
+@endsection
+@section('content')
+    <div class="container">
+        <div class="search">
+            <form method="POST">
+                <div class="row mb-3">
+                    <div class="col col-5">
+                        <div class="input-group">
+                            <label for="aj_search" class="input-group-text"><i class="fa fa-search"></i></label>
+                            <input type="text" data-search-token="{{ csrf_token() }}" data-search-url="{{ route('treasuries.aj') }}" class="form-control" name="search" id="aj_search">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="data_show">
+            <div class="row">
+                <div class="col col-4 border">
+                    <fieldset class="">
+                        <legend>
+                            Root Account
+                            <button class="form-trigger" data-target="#addRoot" {{--route('accounts.create', 0)--}}>
+                                <i class="fa fa-plus"></i></button>
+                        </legend>
+                        <div class="accordion" id="rootLevel" style="position:relative;">
+                            <div class="vLine" style="top: -16px; bottom: 10px"></div>
+                            @foreach($roots as $i => $root)
+                                <div class="accordion-item">
+                                    <div class="accordion-header">
+                                    <span class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#root{{$root->code}}" aria-expanded="true" aria-controls="root{{$root->code}}">
+                                        &#8211;<i class="fa fa-folder"></i></span>&#8211;<span data-id="{{ $root->id }}" data-level="{{ $root->level }}" class="ml-2 parent catItem">{{$root->e_name}}</span>
+                                    </div>
+                                    <div id="root{{$root->code}}" class="accordion-collapse collapse" data-bs-parent="#rootLevel">
+                                        <div class="accordion-body">
+                                            <div class="vLine" style="left: 19px"></div>
+                                            {{--                                Level 2 --}}
+                                            <div class="accordion" style="margin-left: 20px;" id="catsLevel">
+                                                @foreach($root->cats as $ii => $cat)
+                                                    <div class="accordion-item">
+                                                        <div class="accordion-header">
+                                                <span class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cat{{$cat->code}}" aria-expanded="true" aria-controls="cat{{$cat->code}}">
+                                                    &#8211;<i class="fa fa-folder"></i></span>&#8211;<span data-id="{{ $cat->id }}" data-level="{{ $cat->level }}" class="ml-2 parent catItem">{{$cat->e_name}}</span>
+                                                        </div>
+                                                        <div id="cat{{$cat->code}}" class="accordion-collapse collapse" data-bs-parent="#catsLevel">
+                                                            <div class="accordion-body">
+                                                                <div class="vLine" style="left: 16px"></div>
+                                                                @foreach($cat->children as $iii => $child)
+                                                                    <div class="ml-3 accordion-header">
+                                                                        &#8212;<span data-id="{{ $child->id }}" data-level="{{ $child->level }}" class="ml-2 child catItem">{{$child->e_name}}</span>
+                                                                    </div>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <table id="data" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Manage</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @php $i = 1 @endphp
+                @if(count($cats))
+                    @if(isset($cats) &&!empty($cats)) @foreach ($cats as $cat)
+                        <tr>
+                            <td>{{ $i }}</td>
+                            <td>{{ $cat->name }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-success" ><a href="/admin/sales/cats/view/{{ $cat->id }}"><span class="btn-title">View Treasury {{ $cat->name }}</span><i class="fa fa-eye text-light"></i></a></button>
+                                <button class="btn btn-sm btn-primary" ><a href="/admin/sales/cats/edit/{{ $cat->id }}"><span class="btn-title">Edit Treasury {{ $cat->name }}</span><i class="fa fa-edit text-light"></i></a></button>
+                                <button class="btn btn-sm btn-danger"><a href="/admin/sales/cats/delete/{{ $cat->id }}"><span class="btn-title">Delete Treasury {{ $cat->name }}</span><i class="fa fa-trash text-light"></i></a></button>
+                                @if(!$cat->status)
+                                    <button class="btn btn-sm btn-primary"><a href="/admin/sales/cats/status/{{ $cat->id }}"><span class="btn-title">Activate Treasury {{ $cat->name }}</span><i class="fa fa-check text-light"></i></a></button>
+                                @endif
+                            </td>
+                        </tr>
+                        @php $i++ @endphp
+                    @endforeach
+                    @endif
+                @else
+                    <tr>
+                        <td colspan="5">No data to display</td>
+                    </tr>
+                @endif
+                </tbody>
+            </table>
+            {{ $cats->links() }}
+        </div>
+
+    </div>
+
+@endsection
+
+
+@section('script')
+    <script type="text/javascript" src="{{ asset('assets/admin/js/treasury/search.datatables.js') }}"></script>
+@endsection

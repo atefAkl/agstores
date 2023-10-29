@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Tables</title>
+  <link rel="stylesheet" href="datatables.min.css">
+  <script src="/jQuery-3.6.0/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <table id="datatable" class="table">
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Auth</td>
+        <td>Manage</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Ali</td>
+        <td>Khan Younis</td>
+        <td>Up Del Ed Sh</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Mona</td>
+        <td>Zorba</td>
+        <td>Up Del Ed Sh</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Mokhtar</td>
+        <td>Yanni</td>
+        <td>Up Del Ed Sh</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Dalia</td>
+        <td>Mosbah</td>
+        <td>Up Del Ed Sh</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form action="">
+    <input type="number" id="l" name="len" step="0.01">
+    <input type="number" id="w" name="width" step="0.01">
+    <div type="number" id="len"></div>
+
+
+  </form>
+
+  <script src="datatables.min.js"></script>
+
+  <script>
+    $(window).ready(function () {
+      $('#datatable').DataTable();
+    })
+
+    $(window).on('keyup', function (e) {
+      $('#result').text = 1 - Number($('#l').val()) + Number($('#w').val()) 
+    })
+  </script>
+</body>
+</html>
