@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -13,13 +14,16 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected static $professions = [['Application Admin', 'مدير التطبيق'],  ['general manager', 'المدير العام'], ['Financial Manager', 'المدير المالى'], ['Inventory Man', 'أمين المخازن'], ['Accountant', 'المحاسب'], ['Store Man', 'مسئول التخزين'], ['labourer', 'عامل']];
     public function index()
     {
         //
-        $users = User::where([])->orderBy(['id', 'asc'])->paginate(10);
+        $users = User::where([])->orderBy('id', 'ASC')->paginate(10);
 
         $vars = [
             'users' => $users,
+            'professions' => static::$professions
         ];
         return view ('admin.users.index', $vars);
     }
@@ -33,7 +37,10 @@ class UsersController extends Controller
     {
         //
 
-        
+        $vars = [
+            'professions' => static::$professions,
+        ];
+        return view ('admin.users.create', $vars);
     }
 
     /**
@@ -45,6 +52,23 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         //
+        $user = new User();
+
+        $user->userName         = $request->userName;
+        $user->email            = $request->email;
+        $user->password         = $request->password;
+        $user->company          = auth()->user()->company;
+        $user->created_at       = date('Ymd H:i:s');
+
+        if ($user->save()) {
+            $profile = UserProfile::initiateNewProfile($request);
+            $profile->userId = $user->id;
+            if ($profile->save()) {
+                return redirect () -> route('users.show', [$user->id, 1])->withSuccess('تمت الإضافة بنجاح');
+            } 
+            return redirect () -> back()->withError('تم إضافة موظف جديد بنجاح');
+        } 
+        return redirect () -> back()->withError('حدث خطأ أثناء حفظ الموظف الجديد');
     }
 
     /**
@@ -53,9 +77,18 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $tab)
     {
         //
+        $vars = [
+            'user' => User::find($id),
+            'profile' => UserProfile::where(['userId' => $id])->first(),
+            'professions' => static::$professions,
+            'tab' => $tab
+        ];
+
+        return view ('admin.users.show', $vars);
+
     }
 
     /**

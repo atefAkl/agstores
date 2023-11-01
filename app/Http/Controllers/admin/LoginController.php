@@ -38,7 +38,9 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function logout (Request $request) {        session()->flush();
+    public function logout (Request $request) {        
+        
+        session()->flush();
         Auth::logout();
         return redirect()->route('admin.auth.login');
     }

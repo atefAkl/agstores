@@ -165,12 +165,14 @@ button a {
 
 button a span.btn-title {
     position: absolute;
-    bottom: 36px;
+    top: 36px;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.8);
     height: 0;
+    display: block;
+    white-space: nowrap;
     overflow: hidden;
-    right: 0;
+    left: 0;
 }
 
 .buttons {
@@ -263,28 +265,24 @@ table tr td input {
 
 button a:hover span.btn-title {
     transition-property: height;
-    transition-delay: 1s;
+    transition-delay: .3s;
     transition-duration: 0.5s;
     transition-timing-function:  linear;
-    max-width: 200px;
     height: auto;
+    min-width: 200px;
     border-radius: 16px;
     padding: 8px 16px;
-    overflow: visible;
-    right: -10px;
+    left: -10px;
 }
-button a:hover span.btn-title:after {
-    content: '';
-    display: block;
-    height: 0;
-    width: 0;
-    position: absolute;
-    top: 99%;
-    right: 16px;
-    border: solid 5px transparent;
-    border-top: solid 10px rgba(0, 0, 0, 0.8);
 
+label.required:after {
+    display: block;
+    content: "*";
+    color: red;
+    font-size: 20px;
+    margin-top: -12px;
 }
+
 .tags {
     margin-bottom: 10px;
     padding: 6px 16px;
@@ -299,16 +297,138 @@ button a:hover span.btn-title:after {
     background-color: rgba(54, 112, 71, 0.781);
 }
 
+/* Tabs  */
+
+b {
+    color: rgb(0, 81, 255)
+}
+
+nav .nav-tabs {
+    padding: 0 40px;
+}
+
+nav .nav-tabs button.nav-link {
+    margin: 0 3px 0;
+    border: 1px solid #6c757d;
+    color: #999
+}
+nav .nav-tabs button.nav-link.active {
+    color: rgb(0, 81, 255);
+    border: 1px solid #6c757d;
+    border-bottom: 5px solid #ffffff;
+}
+
+.nav-link a {
+    color: #999;
+    font: bold 14px/1.4 Cairo;
+}
+.nav-link.active a {
+    color: inherit
+}
+
+.tab-content {
+    border: 1px solid #345678;
+    margin-top: -4px;
+    text-align: right;
+    padding: .5em;
+}
+.tab-pane h4 {
+    font: bold 14px/1.4 Cairo;
+    color:rgb(0, 81, 255);
+    border: 2px solid transparent;
+    display: inline-block ;
+    border-bottom-color: #345678;
+    padding: 6px 1em;
+}
+ol {
+    list-style-type:none; 
+    padding: 0;
+}
+ol li {
+    margin-bottom: 8px;
+    background-color: #e4e3e3;
+    padding: 5px;
+}
+div.create-form.total {
+    padding: 0.25em;
+    background-color: #e4e3e3;
+}
+
+div.create-form.total > div {
+    padding: 0.25em 1em
+}
+
+div.create-form.total > div:first-child { 
+    text-align: left;
+    font: bolder 16px/1 Cairo;
+}
+
+div.create-form.total > div.number { 
+    border: 1px solid #345678;
+    background-color: #efefef;
+}
+
+div.create-form .col button,
+div.create-form .col label {
+    font: bold 10px/1 'Cairo';
+    padding: 3px 12px !important;
+}
+
+div.create-form .col button{
+    height: 33px !important;
+}
+div.create-form .col select, 
+div.create-form div.col input[type=text],
+div.create-form div.col input[type=number] {
+    font: normal 12px/1 'Cairo' !important;
+    height: 33px !important;
+    text-align: center;
+    width: 100%;
+}
+
+.teb_footer {
+    justify-content: end; 
+    background-color:rgb(031, 117, 254); 
+    width: auto; 
+    margin: 0; 
+    height: 40px; 
+    position: absolute; 
+    bottom: -8px; 
+    left: -8px; 
+    right: -8px;
+}
+
+.teb_footer > div {
+    margin: 5px 0; 
+    height: 30px; 
+    line-height: 30px;
+    color: white;
+}
+
+.teb_footer > div.number {
+    border: 1px solid #345678;
+    margin: 5px 16px;
+    background-color: #fff;
+    color: #345678
+}
+
+.teb_footer > div.text {
+    font: bolder 16px/1.8 'Cairo';
+    text-align: left;
+}
+div.hide {
+    display: none;
+}
+
 /*Fieldset*/
 
 fieldset {
     margin: 2em auto;
     position: relative;
     display: block;
-    box-shadow: 0 0 5px 1px #aaa;
+    box-shadow: 0 0 30px 1px #aaa;
     background-color: #fff;
     padding: 20px 16px 16px;
-    border: 1px solid #aaa;
     display: block;
 }
 
@@ -322,9 +442,8 @@ fieldset legend {
     background-color: #fff;
     display: inline-block !important;
     padding: 10px 1.5em;
-    font: Bolder 1em/1 "Cairo SemiBold";
-    box-shadow: 0 0 8px 2px #aaa;
-    border: 1px solid #aaa;
+    font: 700 1em/1 "Cairo";
+    box-shadow: 0 0 3px 1px #aaa;
 }
 .receipt_info .col {
     text-align: right;
@@ -456,7 +575,8 @@ input.form-control, select.form-select option {
 .input-group label.input-group-text:last-child,
 .input-group button.input-group-text:last-child,
 .input-group input.form-control:last-child,
-.input-group select.form-control:last-child {
+.input-group select.form-control:last-child,
+.input-group label.form-control:last-child {
     border-radius: 0;
     border-top-left-radius: 1em;
     border-bottom-left-radius: 1em;

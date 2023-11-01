@@ -276,16 +276,23 @@
 
 
                         <li class="nav-item">
-                            <a href="{{ route('permission.reles.home') }}" class="nav-link">
+                            <a href="{{ route('permissions.home') }}" class="nav-link">
                                 <i class="fa fa-tag nav-icon"></i>
                                 <p> الصلاحيات </p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('users.home') }}" class="nav-link">
+                            <a href="{{ route('rules.home') }}" class="nav-link">
                                 <i class="fa fa-tag nav-icon"></i>
                                 <p> الأدوار </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('mainmenues.home') }}" class="nav-link">
+                                <i class="fa fa-tag nav-icon"></i>
+                                <p> القوائم الرئيسية </p>
                             </a>
                         </li>
 

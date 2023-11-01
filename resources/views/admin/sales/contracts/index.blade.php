@@ -53,7 +53,7 @@
             <a href="{{ route('contract.approve', [$contract->id]) }}"><i class="fa fa-check text-success"></i></a>
             @else
             <a href="{{ route('contract.park', [$contract->id]) }}"><i class="fa fa-parking text-info" title="إيقاف العقد للتعديل"></i></a>
-            <a href="{{ route('movements.receipt.create', [$contract->id]) }}"><i class="fa fa-spinner fa-pulse fa-fw" title="إضافة سندات على العقد"></i></a>
+            <a href="{{ route('receipt.create', [$contract->id]) }}"><i class="fa fa-spinner fa-pulse fa-fw" title="إضافة سندات على العقد"></i></a>
             
             @endif
           </td>
