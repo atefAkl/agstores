@@ -57,7 +57,7 @@ class MainMenuesController extends Controller
         $mm = new MainMenu ();
         $mm->name         =  $request->name;
         $mm->created_by   =  auth()-> user() -> id;
-        $mm->company      =  auth()-> user() -> company;
+        $mm->menu_link      =  $request->menu_link;
         $mm->created_at   =  date('Y-m-d H:i:s');;
         $mm->status       =  true;
         if ($mm->save()) {
@@ -105,6 +105,7 @@ class MainMenuesController extends Controller
         } 
         $menu->name = $req->name;
         $menu->status = $req->status;
+        $menu->menu_link = $req->menu_link;
 
         $menu->updated_at = date('Y-m-d H:i:s');
         if ($menu->save()){

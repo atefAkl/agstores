@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 12, 2023 at 04:53 AM
--- Server version: 5.7.31
--- PHP Version: 7.4.9
+-- Generation Time: Nov 09, 2023 at 02:22 PM
+-- Server version: 8.0.31
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,27 +29,27 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `a_name` varchar(150) NOT NULL,
   `e_name` varchar(150) NOT NULL,
   `type` tinyint(1) NOT NULL,
-  `parent_cat` bigint(20) UNSIGNED NOT NULL,
+  `parent_cat` bigint UNSIGNED NOT NULL,
   `brief` varchar(1024) DEFAULT NULL,
-  `level` int(11) DEFAULT NULL,
+  `level` int DEFAULT NULL,
   `short_name` char(32) NOT NULL,
   `serial` char(20) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  `company` int(11) NOT NULL,
+  `company` int NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `parent_cat` (`parent_cat`),
   KEY `measuring_unit` (`level`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -59,19 +59,19 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 
 DROP TABLE IF EXISTS `accounts_categories`;
 CREATE TABLE IF NOT EXISTS `accounts_categories` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `a_name` varchar(150) NOT NULL,
   `e_name` varchar(150) NOT NULL,
   `brief` varchar(1024) DEFAULT NULL,
-  `company` int(11) NOT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `company` int NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `accounts_categories`
@@ -98,26 +98,26 @@ INSERT INTO `accounts_categories` (`id`, `a_name`, `e_name`, `brief`, `company`,
 
 DROP TABLE IF EXISTS `accounts_info`;
 CREATE TABLE IF NOT EXISTS `accounts_info` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `company` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-  `state` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `company` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `state` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `city` varchar(100) DEFAULT NULL,
   `street` varchar(100) DEFAULT NULL,
-  `country` int(11) DEFAULT NULL,
+  `country` int DEFAULT NULL,
   `cr` char(16) DEFAULT NULL,
-  `vat` char(16) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `email` char(100) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `website` char(100) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `phone` char(16) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `vat` char(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `email` char(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `website` char(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `phone` char(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `accounts_info_ibfk_2` (`updated_by`),
   KEY `accounts_info_ibfk_4` (`country`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `accounts_info`
@@ -134,19 +134,19 @@ INSERT INTO `accounts_info` (`id`, `company`, `state`, `city`, `street`, `countr
 
 DROP TABLE IF EXISTS `accounts_types`;
 CREATE TABLE IF NOT EXISTS `accounts_types` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `a_name` varchar(150) NOT NULL,
   `e_name` varchar(150) NOT NULL,
   `brief` varchar(1024) DEFAULT NULL,
-  `company` int(11) NOT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `company` int NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `accounts_types`
@@ -168,18 +168,18 @@ INSERT INTO `accounts_types` (`id`, `a_name`, `e_name`, `brief`, `company`, `cre
 
 DROP TABLE IF EXISTS `admins`;
 CREATE TABLE IF NOT EXISTS `admins` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `userName` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `company` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `role` tinyint(2) DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `iqama` varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `userName` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `company` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` tinyint DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `iqama` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `company_name` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `userName`, `email`, `password`, `company`, `role`, `phone`, `iqama`, `created_at`, `updated_at`, `company_name`) VALUES
-(1, 'عاطف سعد الدين محمد ', 'admin', 'admin@gmail.com', '$2y$10$ytRz7P/Tw4w.vIGy625kTuCFQFkZmwslxfEVxPf4o4YsEHXp8VIwG', '1', NULL, NULL, NULL, '2022-09-23 12:24:42', '2022-09-23 12:26:03', 'مخازن أيمن الغماس للتخزين\r\n'),
+(1, 'عاطف سعد الدين محمد ', 'admin', 'admin@gmail.com', '$2y$10$ytRz7P/Tw4w.vIGy625kTuCFQFkZmwslxfEVxPf4o4YsEHXp8VIwG', '1', 0, NULL, NULL, '2022-09-23 12:24:42', '2022-09-23 12:26:03', 'مخازن أيمن الغماس للتخزين\r\n'),
 (2, 'ايمن محمد الغماس', 'Ayman Alghamas', 'ayman@gmail.com', '$2y$10$ytRz7P/Tw4w.vIGy625kTuCFQFkZmwslxfEVxPf4o4YsEHXp8VIwG', '1', 2, '009665031131119', '10203050406', '2022-09-23 12:24:42', '2023-08-17 21:00:00', 'مخازن أيمن الغماس للتخزين\r\n');
 
 -- --------------------------------------------------------
@@ -199,15 +199,15 @@ INSERT INTO `admins` (`id`, `name`, `userName`, `email`, `password`, `company`, 
 
 DROP TABLE IF EXISTS `business_brands`;
 CREATE TABLE IF NOT EXISTS `business_brands` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` char(100) NOT NULL,
   `brief` char(255) DEFAULT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) DEFAULT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `business_brands`
@@ -228,7 +228,7 @@ INSERT INTO `business_brands` (`id`, `name`, `brief`, `created_by`, `updated_by`
 
 DROP TABLE IF EXISTS `clients`;
 CREATE TABLE IF NOT EXISTS `clients` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` char(255) NOT NULL,
   `scope` char(100) DEFAULT NULL,
   `s_number` char(11) NOT NULL,
@@ -243,15 +243,15 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `vat` varchar(16) DEFAULT NULL,
   `logo` char(72) DEFAULT NULL,
   `files` varchar(1023) DEFAULT NULL,
-  `company` bigint(20) NOT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) DEFAULT NULL,
+  `company` bigint NOT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   `person` char(100) NOT NULL,
   `iqama` char(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `clients`
@@ -271,16 +271,16 @@ INSERT INTO `clients` (`id`, `name`, `scope`, `s_number`, `website`, `phone`, `m
 
 DROP TABLE IF EXISTS `companies`;
 CREATE TABLE IF NOT EXISTS `companies` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `shortName` char(100) NOT NULL,
   `logo` char(100) NOT NULL,
   `longName` char(255) DEFAULT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) DEFAULT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `companies`
@@ -300,28 +300,28 @@ INSERT INTO `companies` (`id`, `shortName`, `logo`, `longName`, `created_by`, `u
 
 DROP TABLE IF EXISTS `contracts`;
 CREATE TABLE IF NOT EXISTS `contracts` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `code` char(20) DEFAULT NULL,
   `brief` varchar(255) DEFAULT NULL,
-  `start_period` int(2) UNSIGNED NOT NULL,
-  `renew_period` int(2) UNSIGNED NOT NULL,
+  `start_period` int UNSIGNED NOT NULL,
+  `renew_period` int UNSIGNED NOT NULL,
   `in_day_greg` date NOT NULL,
   `in_day_hij` char(20) NOT NULL,
-  `client` bigint(20) UNSIGNED NOT NULL,
+  `client` bigint UNSIGNED NOT NULL,
   `starts_in_greg` date NOT NULL,
   `starts_in_hij` char(20) NOT NULL,
   `ends_in_greg` date NOT NULL,
   `ends_in_hij` char(20) NOT NULL,
-  `status` tinyint(2) NOT NULL,
+  `status` tinyint NOT NULL,
   `s_number` char(20) DEFAULT NULL,
-  `type` tinyint(2) DEFAULT NULL,
-  `company` bigint(20) NOT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) DEFAULT NULL,
+  `type` tinyint DEFAULT NULL,
+  `company` bigint NOT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `contracts`
@@ -342,25 +342,25 @@ INSERT INTO `contracts` (`id`, `code`, `brief`, `start_period`, `renew_period`, 
 
 DROP TABLE IF EXISTS `contract_items`;
 CREATE TABLE IF NOT EXISTS `contract_items` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `item` bigint(20) UNSIGNED NOT NULL,
-  `qty` int(11) NOT NULL,
-  `unit` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `item` bigint UNSIGNED NOT NULL,
+  `qty` int NOT NULL,
+  `unit` bigint UNSIGNED NOT NULL,
   `unit_price` decimal(7,2) NOT NULL,
-  `contract` bigint(20) UNSIGNED NOT NULL,
+  `contract` bigint UNSIGNED NOT NULL,
   `barcode` char(16) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  `company` int(11) NOT NULL,
+  `company` int NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `parent_cat` (`unit`),
   KEY `measuring_unit` (`contract`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `contract_items`
@@ -380,19 +380,19 @@ INSERT INTO `contract_items` (`id`, `item`, `qty`, `unit`, `unit_price`, `contra
 
 DROP TABLE IF EXISTS `contract_payment_schedule_entries`;
 CREATE TABLE IF NOT EXISTS `contract_payment_schedule_entries` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `ratio` int(3) DEFAULT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `ratio` int DEFAULT NULL,
   `brief` varchar(255) DEFAULT NULL,
   `amount` decimal(7,2) DEFAULT NULL,
-  `contract` bigint(20) UNSIGNED NOT NULL,
-  `ordering` tinyint(2) DEFAULT NULL,
-  `company` bigint(20) NOT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) DEFAULT NULL,
+  `contract` bigint UNSIGNED NOT NULL,
+  `ordering` tinyint DEFAULT NULL,
+  `company` bigint NOT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `contract_payment_schedule_entries`
@@ -411,25 +411,25 @@ INSERT INTO `contract_payment_schedule_entries` (`id`, `ratio`, `brief`, `amount
 
 DROP TABLE IF EXISTS `contract_receipts`;
 CREATE TABLE IF NOT EXISTS `contract_receipts` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `contract` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `contract` bigint UNSIGNED NOT NULL,
   `driver` char(20) DEFAULT NULL,
-  `client` bigint(20) UNSIGNED NOT NULL,
-  `status` tinyint(2) NOT NULL,
+  `client` bigint UNSIGNED NOT NULL,
+  `status` tinyint NOT NULL,
   `serial` int(6) UNSIGNED ZEROFILL NOT NULL,
   `iqama` char(14) DEFAULT NULL,
   `notes` varchar(255) DEFAULT NULL,
   `shift` tinyint(1) NOT NULL,
   `day_in_greg` char(14) NOT NULL,
   `day_in_hijri` char(14) NOT NULL,
-  `type` tinyint(2) DEFAULT NULL,
-  `company` bigint(20) NOT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) DEFAULT NULL,
+  `type` tinyint DEFAULT NULL,
+  `company` bigint NOT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `contract_receipts`
@@ -447,13 +447,13 @@ INSERT INTO `contract_receipts` (`id`, `contract`, `driver`, `client`, `status`,
 
 DROP TABLE IF EXISTS `countries`;
 CREATE TABLE IF NOT EXISTS `countries` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `a_name` varchar(50) DEFAULT NULL,
   `e_name` varchar(50) NOT NULL,
   `iso` varchar(10) DEFAULT NULL,
   `code` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=454 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=454 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `countries`
@@ -709,16 +709,16 @@ INSERT INTO `countries` (`id`, `a_name`, `e_name`, `iso`, `code`) VALUES
 
 DROP TABLE IF EXISTS `dashboard_settings`;
 CREATE TABLE IF NOT EXISTS `dashboard_settings` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  `general_alert` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) NOT NULL,
+  `general_alert` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -739,12 +739,12 @@ INSERT INTO `dashboard_settings` (`id`, `name`, `icon`, `code`, `status`, `gener
 
 DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
@@ -758,27 +758,27 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 
 DROP TABLE IF EXISTS `invoices`;
 CREATE TABLE IF NOT EXISTS `invoices` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(120) DEFAULT NULL,
-  `client` bigint(20) UNSIGNED DEFAULT NULL,
-  `type` bigint(20) NOT NULL,
+  `client` bigint UNSIGNED DEFAULT NULL,
+  `type` bigint NOT NULL,
   `number` varchar(14) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `Updated_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
-  `company` int(11) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT '0',
+  `created_by` bigint UNSIGNED NOT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
+  `company` int DEFAULT NULL,
+  `status` tinyint DEFAULT '0',
   `discount` decimal(7,2) DEFAULT NULL,
   `VAT` decimal(5,2) DEFAULT NULL,
   `TAX` decimal(5,2) DEFAULT NULL,
   `claiming_at` datetime DEFAULT NULL,
-  `account` int(11) NOT NULL,
+  `account` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `invoices_ibfk_1` (`created_by`),
   KEY `invoices_ibfk_2` (`updated_by`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -788,25 +788,25 @@ CREATE TABLE IF NOT EXISTS `invoices` (
 
 DROP TABLE IF EXISTS `items`;
 CREATE TABLE IF NOT EXISTS `items` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `a_name` varchar(150) NOT NULL,
   `e_name` varchar(150) NOT NULL,
-  `parent_cat` bigint(20) UNSIGNED NOT NULL,
+  `parent_cat` bigint UNSIGNED NOT NULL,
   `brief` varchar(1024) DEFAULT NULL,
-  `unit` bigint(20) UNSIGNED DEFAULT NULL,
+  `unit` bigint UNSIGNED DEFAULT NULL,
   `barcode` char(16) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  `company` int(11) NOT NULL,
+  `company` int NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `parent_cat` (`parent_cat`),
   KEY `measuring_unit` (`unit`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `items`
@@ -826,24 +826,24 @@ INSERT INTO `items` (`id`, `a_name`, `e_name`, `parent_cat`, `brief`, `unit`, `b
 
 DROP TABLE IF EXISTS `items_cats`;
 CREATE TABLE IF NOT EXISTS `items_cats` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `a_name` varchar(150) NOT NULL,
   `e_name` varchar(100) DEFAULT NULL,
   `brief` varchar(1024) DEFAULT NULL,
-  `parent_cat` bigint(20) UNSIGNED DEFAULT NULL,
+  `parent_cat` bigint UNSIGNED DEFAULT NULL,
   `code` char(14) DEFAULT NULL,
   `level` tinyint(1) DEFAULT NULL,
   `status` char(16) NOT NULL,
-  `company` int(11) NOT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `company` int NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `items_cats_ibfk_1` (`parent_cat`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `items_cats`
@@ -860,12 +860,47 @@ INSERT INTO `items_cats` (`id`, `a_name`, `e_name`, `brief`, `parent_cat`, `code
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `main_menues`
+--
+
+DROP TABLE IF EXISTS `main_menues`;
+CREATE TABLE IF NOT EXISTS `main_menues` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `menu_link` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `created_by` (`created_by`,`updated_by`),
+  KEY `updated_by` (`updated_by`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `main_menues`
+--
+
+INSERT INTO `main_menues` (`id`, `name`, `menu_link`, `created_at`, `updated_at`, `created_by`, `updated_by`, `status`) VALUES
+(2, 'لوحة التحكم', '/dashboard', '2023-11-01 01:58:15', '2023-11-09 03:49:12', 1, NULL, 1),
+(3, 'الحسابات العامة', 'accounts', '2023-11-01 10:22:31', '2023-11-09 03:46:15', 1, NULL, 1),
+(4, 'التخزين', 'stores', '2023-11-01 10:22:42', '2023-11-09 03:47:02', 1, NULL, 1),
+(5, 'المشتريات', 'purchases', '2023-11-01 10:22:49', '2023-11-09 03:47:44', 1, NULL, 1),
+(6, 'المبيعات', '1', '2023-11-01 10:23:01', '2023-11-09 03:48:00', 1, NULL, 1),
+(7, 'التشغيل', '1', '2023-11-01 10:23:11', '2023-11-09 03:48:57', 1, NULL, 1),
+(8, 'الموارد البشرية', '1', '2023-11-01 10:23:27', '2023-11-06 06:50:07', 1, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `measuring_units`
 --
 
 DROP TABLE IF EXISTS `measuring_units`;
 CREATE TABLE IF NOT EXISTS `measuring_units` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `a_name` varchar(120) NOT NULL,
   `e_name` varchar(120) DEFAULT '0',
   `is_master` tinyint(1) DEFAULT '0',
@@ -873,14 +908,14 @@ CREATE TABLE IF NOT EXISTS `measuring_units` (
   `e_label` varchar(20) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) DEFAULT NULL,
-  `company` bigint(20) NOT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
+  `company` bigint NOT NULL,
   `cashier` tinyint(1) DEFAULT '1',
-  `status` tinyint(4) DEFAULT '0',
+  `status` tinyint DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`a_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `measuring_units`
@@ -901,9 +936,9 @@ INSERT INTO `measuring_units` (`id`, `a_name`, `e_name`, `is_master`, `a_label`,
 
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `migration` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -926,18 +961,18 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 DROP TABLE IF EXISTS `money_pass_rules`;
 CREATE TABLE IF NOT EXISTS `money_pass_rules` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `treasury_id` int(11) NOT NULL,
-  `push_to` int(11) DEFAULT NULL,
-  `pull_from` int(11) DEFAULT NULL,
-  `created_by` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `treasury_id` int NOT NULL,
+  `push_to` int DEFAULT NULL,
+  `pull_from` int DEFAULT NULL,
+  `created_by` int NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `company` int(11) NOT NULL,
-  `status` tinyint(4) DEFAULT '0',
+  `updated_by` int DEFAULT NULL,
+  `company` int NOT NULL,
+  `status` tinyint DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `money_pass_rules`
@@ -967,11 +1002,51 @@ INSERT INTO `money_pass_rules` (`id`, `treasury_id`, `push_to`, `pull_from`, `cr
 
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permissions`
+--
+
+DROP TABLE IF EXISTS `permissions`;
+CREATE TABLE IF NOT EXISTS `permissions` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `menu_id` bigint UNSIGNED NOT NULL,
+  `submenu_id` bigint UNSIGNED NOT NULL,
+  `permission_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  `created_at` datetime NOT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `updated_by` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Permission roles table';
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `menu_id`, `submenu_id`, `permission_link`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(3, 'إنشاء حساب جديد', 5, 2, '/accouns/create', 1, '2023-11-08 06:46:23', 1, '2023-11-08 06:46:23', NULL),
+(4, 'إضافة حساب جديد', 2, 5, '/accouns/create', 0, '2023-11-08 06:48:53', 1, '2023-11-08 07:56:10', 1),
+(5, 'تعديل بيانات حساب', 2, 5, '/accounts/edit', 1, '2023-11-08 06:49:33', 1, '2023-11-08 06:49:33', NULL),
+(6, 'حذف حساب', 2, 5, '/accounts/destroy', 1, '2023-11-08 07:04:17', 1, '2023-11-08 07:04:17', NULL),
+(7, 'عرض رصيد حساب', 2, 5, '/accounts/credit-report', 1, '2023-11-08 07:18:51', 1, '2023-11-08 07:18:51', NULL),
+(10, 'إضافة مستخدم جديد', 2, 10, '/', 1, '2023-11-09 13:33:47', 1, '2023-11-09 13:33:47', NULL),
+(11, 'تعديل بيانات مستخدم', 2, 10, '/', 1, '2023-11-09 13:34:05', 1, '2023-11-09 13:34:05', NULL),
+(12, 'تغيير كلمة مرور مستخدم', 2, 10, '/', 1, '2023-11-09 14:03:44', 1, '2023-11-09 14:03:44', NULL),
+(13, 'حذف مستخدم', 2, 10, '/', 1, '2023-11-09 14:04:05', 1, '2023-11-09 14:04:05', NULL),
+(14, 'إضافة أدوار للمستخدم', 2, 10, '//', 1, '2023-11-09 14:04:48', 1, '2023-11-09 14:06:48', 1),
+(15, 'حذف أدوار من المستخدم', 2, 10, '/', 1, '2023-11-09 14:05:05', 1, '2023-11-09 14:05:05', NULL),
+(16, 'إضافة صلاحيات خاصة للمستخدم', 2, 10, '/', 1, '2023-11-09 14:07:40', 1, '2023-11-09 14:08:18', 1),
+(17, 'إزالة صلاحيات خاصة من المستخدم', 2, 10, '/', 1, '2023-11-09 14:08:08', 1, '2023-11-09 14:08:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -981,12 +1056,12 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint UNSIGNED NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -1003,31 +1078,33 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
 
 DROP TABLE IF EXISTS `receipts`;
 CREATE TABLE IF NOT EXISTS `receipts` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `type` tinyint(1) DEFAULT '1',
   `greg_date` date NOT NULL,
   `hij_date` char(20) NOT NULL,
-  `client_id` bigint(20) UNSIGNED NOT NULL,
-  `contract_id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint UNSIGNED NOT NULL,
+  `contract_id` bigint UNSIGNED NOT NULL,
   `farm` char(50) DEFAULT NULL,
   `driver` char(50) DEFAULT NULL,
   `notes` char(200) DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL,
   `s_number` char(10) DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_by` bigint UNSIGNED DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `s_number` (`s_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `receipts`
 --
 
 INSERT INTO `receipts` (`id`, `type`, `greg_date`, `hij_date`, `client_id`, `contract_id`, `farm`, `driver`, `notes`, `status`, `s_number`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
-(1, 1, '2023-09-08', '١٠‏/٣‏/١٤٤٥ هـ', 6, 8, 'الحارثية', 'عبيدة', 'مشتريات اليوم الوطنى من بنغاليين', 1, '230000001', '2023-09-25 17:43:26', 2, '2023-09-25 17:43:26', NULL);
+(1, 1, '2023-09-08', '١٠‏/٣‏/١٤٤٥ هـ', 6, 8, 'الحارثية', 'عبيدة', 'مشتريات اليوم الوطنى من بنغاليين', 1, '230000001', '2023-09-25 17:43:26', 2, '2023-09-25 17:43:26', NULL),
+(2, 1, '2023-09-08', '٩‏/٤‏/١٤٤٥ هـ', 3, 7, 'المليدا', 'محمد على', 'مكانش معاه كراتين', 1, '230000002', '2023-10-24 07:45:32', 1, '2023-10-24 07:45:32', NULL),
+(3, 1, '2023-09-08', '٢٠‏/٤‏/١٤٤٥ هـ', 6, 8, 'fghf', 'fhjfgh', 'dhfg', 1, '230000003', '2023-11-04 14:55:22', 1, '2023-11-04 14:55:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -1037,28 +1114,37 @@ INSERT INTO `receipts` (`id`, `type`, `greg_date`, `hij_date`, `client_id`, `con
 
 DROP TABLE IF EXISTS `receipt_entries`;
 CREATE TABLE IF NOT EXISTS `receipt_entries` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `type` tinyint(1) DEFAULT NULL,
-  `table_id` bigint(20) UNSIGNED NOT NULL,
+  `table_id` bigint UNSIGNED NOT NULL,
   `table_size` tinyint(1) DEFAULT NULL,
-  `item_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `box_size` bigint(20) UNSIGNED DEFAULT NULL,
-  `qty` int(3) DEFAULT NULL,
-  `receipt_id` bigint(20) UNSIGNED NOT NULL,
-  `client_id` bigint(20) UNSIGNED NOT NULL,
-  `contract_id` bigint(20) UNSIGNED NOT NULL,
+  `item_id` bigint UNSIGNED DEFAULT NULL,
+  `box_size` bigint UNSIGNED DEFAULT NULL,
+  `tableItemQty` int DEFAULT NULL,
+  `receipt_id` bigint UNSIGNED NOT NULL,
+  `client_id` bigint UNSIGNED NOT NULL,
+  `contract_id` bigint UNSIGNED NOT NULL,
   `date` char(20) DEFAULT NULL,
-  `store_point_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `store_point_id` bigint UNSIGNED DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `item_id` (`item_id`),
   KEY `box_size` (`box_size`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `receipt_entries`
+--
+
+INSERT INTO `receipt_entries` (`id`, `type`, `table_id`, `table_size`, `item_id`, `box_size`, `tableItemQty`, `receipt_id`, `client_id`, `contract_id`, `date`, `store_point_id`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(1, 1, 1, 1, NULL, NULL, NULL, 2, 3, 7, '٩‏/٤‏/١٤٤٥ هـ', NULL, '2023-10-24 08:50:12', 1, '2023-10-24 08:50:12', NULL),
+(2, 1, 5, 1, NULL, NULL, NULL, 2, 3, 7, '٩‏/٤‏/١٤٤٥ هـ', NULL, '2023-10-25 05:37:05', 1, '2023-10-25 05:37:07', NULL),
+(3, 1, 5, 1, NULL, NULL, NULL, 2, 3, 7, '٩‏/٤‏/١٤٤٥ هـ', NULL, '2023-10-25 05:37:54', 1, '2023-10-25 05:37:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -1068,22 +1154,22 @@ CREATE TABLE IF NOT EXISTS `receipt_entries` (
 
 DROP TABLE IF EXISTS `rooms`;
 CREATE TABLE IF NOT EXISTS `rooms` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `a_name` varchar(120) NOT NULL,
   `e_name` varchar(120) NOT NULL,
   `store` tinyint(1) NOT NULL,
   `size` tinyint(1) NOT NULL,
   `serial` varchar(15) DEFAULT NULL,
   `code` char(14) DEFAULT NULL,
-  `company` bigint(20) NOT NULL,
-  `status` tinyint(4) DEFAULT '0',
+  `company` bigint NOT NULL,
+  `status` tinyint DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`a_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `rooms`
@@ -1099,24 +1185,108 @@ INSERT INTO `rooms` (`id`, `a_name`, `e_name`, `store`, `size`, `serial`, `code`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rules`
+--
+
+DROP TABLE IF EXISTS `rules`;
+CREATE TABLE IF NOT EXISTS `rules` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `company` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rules`
+--
+
+INSERT INTO `rules` (`id`, `name`, `company`, `created_at`, `updated_at`, `created_by`, `updated_by`, `status`) VALUES
+(2, 'مدير التطبيق', '1', '2023-11-01 02:19:37', '2023-11-01 02:19:37', 1, NULL, 1),
+(3, 'المدير العام', '1', '2023-11-01 10:45:10', '2023-11-01 10:45:10', 1, NULL, 1),
+(4, 'المدير المالى', '1', '2023-11-01 10:45:20', '2023-11-01 10:45:20', 1, NULL, 1),
+(5, 'المحاسب', '1', '2023-11-01 10:45:30', '2023-11-01 10:45:30', 1, NULL, 1),
+(6, 'مندوب المبيعات', '1', '2023-11-01 10:45:51', '2023-11-01 10:45:51', 1, NULL, 1),
+(7, 'مدير المبيعات', '1', '2023-11-01 10:45:57', '2023-11-01 10:45:57', 1, NULL, 1),
+(8, 'مسؤول استلام البضاعة', '1', '2023-11-01 10:46:40', '2023-11-01 10:46:40', 1, NULL, 1),
+(9, 'أمين المخازن', '1', '2023-11-01 10:46:48', '2023-11-01 10:46:48', 1, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rules_menues`
+--
+
+DROP TABLE IF EXISTS `rules_menues`;
+CREATE TABLE IF NOT EXISTS `rules_menues` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `menu_id` bigint UNSIGNED NOT NULL,
+  `company` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
+  `rule_id` bigint UNSIGNED NOT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `menu_id` (`menu_id`,`company`,`created_by`,`rule_id`),
+  KEY `created_by` (`created_by`),
+  KEY `rule_id` (`rule_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rules_menues`
+--
+
+INSERT INTO `rules_menues` (`id`, `menu_id`, `company`, `created_at`, `updated_at`, `created_by`, `rule_id`, `status`) VALUES
+(1, 5, '1', '2023-11-05 03:18:48', '2023-11-05 03:18:48', 1, 7, 1),
+(2, 2, '1', '2023-11-05 04:02:03', '2023-11-05 04:02:03', 1, 3, 1),
+(3, 3, '1', '2023-11-05 04:02:28', '2023-11-05 04:02:28', 1, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rules_permissions`
+--
+
+DROP TABLE IF EXISTS `rules_permissions`;
+CREATE TABLE IF NOT EXISTS `rules_permissions` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `updated_by` bigint DEFAULT NULL,
+  `company` bigint NOT NULL,
+  `date` datetime NOT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Permission roles table';
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sales_categories`
 --
 
 DROP TABLE IF EXISTS `sales_categories`;
 CREATE TABLE IF NOT EXISTS `sales_categories` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(120) NOT NULL,
-  `parent` bigint(20) UNSIGNED DEFAULT NULL,
+  `parent` bigint UNSIGNED DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) DEFAULT NULL,
-  `company` bigint(20) NOT NULL,
-  `status` tinyint(4) DEFAULT '0',
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
+  `company` bigint NOT NULL,
+  `status` tinyint DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `parent` (`parent`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `sales_categories`
@@ -1134,19 +1304,19 @@ INSERT INTO `sales_categories` (`id`, `name`, `parent`, `created_at`, `updated_a
 
 DROP TABLE IF EXISTS `services`;
 CREATE TABLE IF NOT EXISTS `services` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` char(100) NOT NULL,
   `brief` varchar(255) DEFAULT NULL,
   `price` decimal(5,2) NOT NULL DEFAULT '0.00',
   `unit` tinyint(1) NOT NULL,
   `status` tinyint(1) DEFAULT '1',
-  `company` bigint(20) NOT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) DEFAULT NULL,
+  `company` bigint NOT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `services`
@@ -1164,18 +1334,18 @@ INSERT INTO `services` (`id`, `name`, `brief`, `price`, `unit`, `status`, `compa
 
 DROP TABLE IF EXISTS `slides`;
 CREATE TABLE IF NOT EXISTS `slides` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `slideImage` char(50) NOT NULL,
   `slideTitle` varchar(255) NOT NULL,
   `slideParagraph` varchar(1024) NOT NULL,
   `slideUrl` varchar(1024) DEFAULT NULL,
-  `page` bigint(20) DEFAULT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) DEFAULT NULL,
+  `page` bigint DEFAULT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `slides`
@@ -1194,26 +1364,26 @@ INSERT INTO `slides` (`id`, `slideImage`, `slideTitle`, `slideParagraph`, `slide
 
 DROP TABLE IF EXISTS `stores`;
 CREATE TABLE IF NOT EXISTS `stores` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `a_name` varchar(120) NOT NULL,
   `e_name` varchar(120) NOT NULL,
   `brief` varchar(1024) NOT NULL,
-  `parent` bigint(20) UNSIGNED DEFAULT NULL,
+  `parent` bigint UNSIGNED DEFAULT NULL,
   `code` char(14) DEFAULT NULL,
-  `admin` bigint(20) UNSIGNED DEFAULT NULL,
-  `company` bigint(20) NOT NULL,
-  `status` tinyint(4) DEFAULT '0',
+  `admin` bigint UNSIGNED DEFAULT NULL,
+  `company` bigint NOT NULL,
+  `status` tinyint DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`a_name`),
   KEY `repositories_ibfk_3` (`updated_by`),
   KEY `repositories_ibfk_1` (`admin`),
   KEY `repositories_ibfk_2` (`created_by`),
   KEY `parent` (`parent`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `stores`
@@ -1232,19 +1402,19 @@ INSERT INTO `stores` (`id`, `a_name`, `e_name`, `brief`, `parent`, `code`, `admi
 
 DROP TABLE IF EXISTS `store_boxes`;
 CREATE TABLE IF NOT EXISTS `store_boxes` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(15) NOT NULL,
   `short` char(10) DEFAULT NULL,
   `pic` char(72) DEFAULT NULL,
-  `company` int(11) NOT NULL,
+  `company` int NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `store_boxes`
@@ -1266,19 +1436,19 @@ INSERT INTO `store_boxes` (`id`, `name`, `short`, `pic`, `company`, `created_at`
 
 DROP TABLE IF EXISTS `store_items`;
 CREATE TABLE IF NOT EXISTS `store_items` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(15) NOT NULL,
   `short` char(10) DEFAULT NULL,
   `pic` char(72) DEFAULT NULL,
-  `company` int(11) NOT NULL,
+  `company` int NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `store_items`
@@ -1324,21 +1494,58 @@ INSERT INTO `store_items` (`id`, `name`, `short`, `pic`, `company`, `created_at`
 
 DROP TABLE IF EXISTS `store_points`;
 CREATE TABLE IF NOT EXISTS `store_points` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(120) NOT NULL,
-  `room` bigint(20) UNSIGNED NOT NULL,
-  `store` bigint(20) UNSIGNED NOT NULL,
+  `room` bigint UNSIGNED NOT NULL,
+  `store` bigint UNSIGNED NOT NULL,
   `position` char(20) NOT NULL,
   `code` char(14) NOT NULL,
-  `company` bigint(20) NOT NULL,
-  `status` tinyint(4) DEFAULT '0',
+  `company` bigint NOT NULL,
+  `status` tinyint DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sub_menues`
+--
+
+DROP TABLE IF EXISTS `sub_menues`;
+CREATE TABLE IF NOT EXISTS `sub_menues` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `main_menu` bigint UNSIGNED NOT NULL,
+  `menu_link` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `main_menu` (`main_menu`),
+  KEY `updated_by` (`updated_by`),
+  KEY `created_by` (`created_by`,`updated_by`),
+  KEY `main_menu_2` (`main_menu`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sub_menues`
+--
+
+INSERT INTO `sub_menues` (`id`, `name`, `main_menu`, `menu_link`, `created_at`, `updated_at`, `created_by`, `updated_by`, `status`) VALUES
+(5, 'الرئيسية', 2, '1', '2023-11-07 04:56:44', '2023-11-08 03:02:54', 1, 1, 1),
+(10, 'المستخدمين', 2, '/users/home', '2023-11-09 10:31:27', '2023-11-09 10:31:27', 1, NULL, 1),
+(11, 'القوائم الرئيسية', 2, '/', '2023-11-09 10:32:00', '2023-11-09 10:32:00', 1, NULL, 1),
+(12, 'القوائم الفرعية', 2, '/', '2023-11-09 10:32:16', '2023-11-09 10:32:16', 1, NULL, 1),
+(13, 'الإجراءات', 2, '/', '2023-11-09 10:32:28', '2023-11-09 10:32:28', 1, NULL, 1),
+(14, 'الأدوار', 2, '/', '2023-11-09 10:32:39', '2023-11-09 10:32:39', 1, NULL, 1),
+(15, 'الصلاحيات الخاصة', 2, '/', '2023-11-09 11:13:33', '2023-11-09 11:13:33', 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1348,37 +1555,37 @@ CREATE TABLE IF NOT EXISTS `store_points` (
 
 DROP TABLE IF EXISTS `tables`;
 CREATE TABLE IF NOT EXISTS `tables` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` char(10) NOT NULL,
   `size` tinyint(1) NOT NULL,
-  `capacity` int(3) NOT NULL,
+  `capacity` int NOT NULL,
   `serial` char(10) NOT NULL,
-  `company` bigint(20) NOT NULL,
+  `company` bigint NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
-  `contract_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `store_point_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `the_load` int(3) DEFAULT '0',
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `contract_id` bigint UNSIGNED DEFAULT NULL,
+  `store_point_id` bigint UNSIGNED DEFAULT NULL,
+  `the_load` int DEFAULT '0',
+  `created_by` bigint UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `contract_id` (`contract_id`),
   KEY `store_point_id` (`store_point_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tables`
 --
 
 INSERT INTO `tables` (`id`, `name`, `size`, `capacity`, `serial`, `company`, `status`, `contract_id`, `store_point_id`, `the_load`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
-(1, '1', 1, 221, '4500001', 1, 0, NULL, NULL, 0, 1, '2023-09-10 20:17:06', NULL, '2023-09-10 20:17:06'),
+(1, '1', 1, 221, '4500001', 1, 1, 7, NULL, 0, 1, '2023-09-10 20:17:06', 1, '2023-10-24 08:50:12'),
 (2, '2', 1, 221, '4500002', 1, 0, NULL, NULL, 0, 1, '2023-08-31 20:11:35', NULL, '2023-08-31 20:11:35'),
 (3, '3', 1, 221, '4500003', 1, 0, NULL, NULL, 0, 1, '2023-08-31 20:11:35', NULL, '2023-08-31 20:11:35'),
 (4, '4', 1, 221, '4500004', 1, 0, NULL, NULL, 0, 1, '2023-08-31 20:11:35', NULL, '2023-08-31 20:11:35'),
-(5, '5', 1, 221, '4500005', 1, 0, NULL, NULL, 0, 1, '2023-08-31 20:11:35', NULL, '2023-08-31 20:11:35'),
+(5, '5', 1, 221, '4500005', 1, 1, 7, NULL, 0, 1, '2023-08-31 20:11:35', 1, '2023-10-25 05:37:54'),
 (6, '6', 1, 208, '4500006', 1, 0, NULL, NULL, 0, 1, '2023-08-31 20:11:18', NULL, '2023-08-31 20:11:18'),
 (7, '7', 1, 221, '4500007', 1, 0, NULL, NULL, 0, 1, '2023-08-31 20:25:22', NULL, '2023-08-31 20:25:22'),
 (8, '8', 1, 221, '4500008', 1, 0, NULL, NULL, 0, 1, '2023-08-31 20:25:49', NULL, '2023-08-31 20:25:49'),
@@ -1466,7 +1673,8 @@ INSERT INTO `tables` (`id`, `name`, `size`, `capacity`, `serial`, `company`, `st
 (109, '530', 1, 221, '45000530', 1, 0, NULL, NULL, 0, 1, '2023-09-14 12:18:56', NULL, '2023-09-14 12:18:56'),
 (110, '681', 1, 221, '45000681', 1, 0, NULL, NULL, 0, 1, '2023-09-14 12:19:09', NULL, '2023-09-14 12:19:09'),
 (111, '450', 1, 221, '45000450', 1, 0, NULL, NULL, 0, 1, '2023-09-14 12:19:30', NULL, '2023-09-14 12:19:30'),
-(112, '5222', 2, 286, '45005222', 1, 0, NULL, NULL, 0, 1, '2023-09-21 10:30:42', NULL, '2023-09-21 10:30:42');
+(112, '5222', 2, 286, '45005222', 1, 0, NULL, NULL, 0, 1, '2023-09-21 10:30:42', NULL, '2023-09-21 10:30:42'),
+(113, '4000', 2, 286, '45004000', 1, 0, NULL, NULL, 0, 1, '2023-10-30 08:48:25', NULL, '2023-10-30 08:48:25');
 
 -- --------------------------------------------------------
 
@@ -1476,14 +1684,14 @@ INSERT INTO `tables` (`id`, `name`, `size`, `capacity`, `serial`, `company`, `st
 
 DROP TABLE IF EXISTS `table_contents`;
 CREATE TABLE IF NOT EXISTS `table_contents` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `table_id` bigint(20) UNSIGNED NOT NULL,
-  `store_item_id` bigint(20) UNSIGNED NOT NULL,
-  `qty` int(3) UNSIGNED NOT NULL,
-  `box_size_id` bigint(20) UNSIGNED NOT NULL,
-  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `table_id` bigint UNSIGNED NOT NULL,
+  `store_item_id` bigint UNSIGNED NOT NULL,
+  `qty` int UNSIGNED NOT NULL,
+  `box_size_id` bigint UNSIGNED NOT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint UNSIGNED DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`),
@@ -1491,7 +1699,7 @@ CREATE TABLE IF NOT EXISTS `table_contents` (
   KEY `table_id` (`table_id`),
   KEY `store_item_id` (`store_item_id`),
   KEY `box_size_id` (`box_size_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -1501,22 +1709,22 @@ CREATE TABLE IF NOT EXISTS `table_contents` (
 
 DROP TABLE IF EXISTS `treasuries`;
 CREATE TABLE IF NOT EXISTS `treasuries` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(120) NOT NULL,
   `type` tinyint(1) DEFAULT '0',
-  `parent` bigint(20) UNSIGNED NOT NULL,
+  `parent` bigint UNSIGNED NOT NULL,
   `last_money_out` decimal(10,2) DEFAULT '0.00',
   `last_money_in` decimal(10,2) DEFAULT '0.00',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) DEFAULT NULL,
-  `company` bigint(20) NOT NULL,
-  `cashier` int(11) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT '0',
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
+  `company` bigint NOT NULL,
+  `cashier` int DEFAULT NULL,
+  `status` tinyint DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `treasuries`
@@ -1542,17 +1750,95 @@ INSERT INTO `treasuries` (`id`, `name`, `type`, `parent`, `last_money_out`, `las
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `userName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `company` int NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `users_email_unique` (`email`),
+  KEY `userName` (`userName`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `userName`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `company`) VALUES
+(1, 'admin', 'admin@gmail.com', NULL, '$2y$10$ytRz7P/Tw4w.vIGy625kTuCFQFkZmwslxfEVxPf4o4YsEHXp8VIwG', NULL, '2022-09-23 12:24:42', '2022-09-23 12:26:03', 1),
+(2, 'Ayman Alghamas', 'ayman@gmail.com', NULL, '$2y$10$ytRz7P/Tw4w.vIGy625kTuCFQFkZmwslxfEVxPf4o4YsEHXp8VIwG', NULL, '2022-09-23 12:24:42', '2023-08-17 21:00:00', 1),
+(6, 'abunawaf', 'abunawaf@agstores.com', NULL, '$2y$10$ytRz7P/Tw4w.vIGy625kTuCFQFkZmwslxfEVxPf4o4YsEHXp8VIwG', NULL, '2023-10-30 11:34:51', '2023-10-30 11:34:51', 1),
+(7, 'Hani Sayed', 'Hany@agstores.com', NULL, 'hanysayed', NULL, '2023-10-30 11:53:53', '2023-10-30 11:53:53', 1),
+(8, 'suliman', 'suliman@yahoo.com', NULL, '$2y$10$pO8hBhEDsccRw5byqZssF.ilStvOaCTizfUH5pyGewVf3Hw9e5LF2', NULL, '2023-11-05 10:13:10', '2023-11-05 10:13:10', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_profiles`
+--
+
+DROP TABLE IF EXISTS `users_profiles`;
+CREATE TABLE IF NOT EXISTS `users_profiles` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastName` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` tinyint(1) DEFAULT NULL,
+  `dob` date NOT NULL,
+  `natId` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profileImage` varchar(72) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `userId` bigint UNSIGNED DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `profession` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users_profiles`
+--
+
+INSERT INTO `users_profiles` (`id`, `firstName`, `lastName`, `title`, `gender`, `dob`, `natId`, `profileImage`, `userId`, `updated_at`, `phone`, `profession`, `created_at`) VALUES
+(1, 'أبو نواف', 'اليمنى', 'أبو نواف', 1, '1990-10-30', '1098765432', NULL, 6, '2023-10-30 14:34:51', '0504567890', 3, '2023-10-30 11:34:51'),
+(2, 'هانى', 'السيد', 'أبو احمد', 1, '1991-02-10', '1025469873', NULL, 7, '2023-10-30 14:53:53', '0502356498', 2, '2023-10-30 11:53:53'),
+(3, 'عاطف', 'عقل', 'أبو على', 1, '1979-02-19', '1098765432', NULL, 1, '2023-10-30 14:34:51', '0504567890', 0, '2023-10-30 11:34:51'),
+(4, 'ايمن', 'الغماس', 'ابو محمد', 1, '1991-02-10', '1025469873', NULL, 2, '2023-10-30 14:53:53', '0502356498', 1, '2023-10-30 11:53:53'),
+(5, 'سليمان', 'الحماد', 'ابو عمو', 1, '1996-10-06', '123456789', NULL, 8, '2023-11-05 13:13:10', '123456789', 4, '2023-11-05 10:13:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_rules`
+--
+
+DROP TABLE IF EXISTS `users_rules`;
+CREATE TABLE IF NOT EXISTS `users_rules` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `company` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
+  `rule_id` bigint UNSIGNED NOT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `rule_id` (`rule_id`),
+  KEY `user_id` (`user_id`),
+  KEY `created_by` (`created_by`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users_rules`
+--
+
+INSERT INTO `users_rules` (`id`, `user_id`, `company`, `created_at`, `updated_at`, `created_by`, `rule_id`, `status`) VALUES
+(1, 1, '1', '2023-11-04 04:33:05', '2023-11-04 04:33:05', 1, 2, 1);
 
 --
 -- Constraints for dumped tables
@@ -1592,11 +1878,26 @@ ALTER TABLE `items_cats`
   ADD CONSTRAINT `items_cats_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `admins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `main_menues`
+--
+ALTER TABLE `main_menues`
+  ADD CONSTRAINT `main_menues_ibfk_1` FOREIGN KEY (`updated_by`) REFERENCES `admins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `main_menues_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `admins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `receipt_entries`
 --
 ALTER TABLE `receipt_entries`
   ADD CONSTRAINT `receipt_entries_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `store_items` (`id`),
   ADD CONSTRAINT `receipt_entries_ibfk_2` FOREIGN KEY (`box_size`) REFERENCES `store_boxes` (`id`);
+
+--
+-- Constraints for table `rules_menues`
+--
+ALTER TABLE `rules_menues`
+  ADD CONSTRAINT `rules_menues_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rules_menues_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `main_menues` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rules_menues_ibfk_3` FOREIGN KEY (`rule_id`) REFERENCES `rules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sales_categories`
@@ -1614,6 +1915,14 @@ ALTER TABLE `stores`
   ADD CONSTRAINT `stores_ibfk_4` FOREIGN KEY (`parent`) REFERENCES `stores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `sub_menues`
+--
+ALTER TABLE `sub_menues`
+  ADD CONSTRAINT `sub_menues_ibfk_1` FOREIGN KEY (`main_menu`) REFERENCES `main_menues` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `sub_menues_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `admins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `sub_menues_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `admins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `tables`
 --
 ALTER TABLE `tables`
@@ -1629,6 +1938,20 @@ ALTER TABLE `table_contents`
   ADD CONSTRAINT `table_contents_ibfk_1` FOREIGN KEY (`table_id`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `table_contents_ibfk_2` FOREIGN KEY (`store_item_id`) REFERENCES `store_items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `table_contents_ibfk_3` FOREIGN KEY (`box_size_id`) REFERENCES `store_boxes` (`id`);
+
+--
+-- Constraints for table `users_profiles`
+--
+ALTER TABLE `users_profiles`
+  ADD CONSTRAINT `users_profiles_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users_rules`
+--
+ALTER TABLE `users_rules`
+  ADD CONSTRAINT `users_rules_ibfk_1` FOREIGN KEY (`rule_id`) REFERENCES `rules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `users_rules_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `users_rules_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -11,5 +11,5 @@ class MainMenu extends Model
 
     protected $table = 'main_menues';
 
-    protected $fillable = ['name', 'company', 'created_at', 'updated_at', 'created_by', 'updated_by', 'status'];
+    protected $fillable = ['name', 'menu_link', 'created_at', 'updated_at', 'created_by', 'updated_by', 'status'];
 }

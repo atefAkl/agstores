@@ -3,8 +3,8 @@
 @section('homeLink') القوائم الفرعية @endsection
 @section('homeLinkActive') عرض بيانات قائمة فرعية @endsection
 @section('links')
-    <button class="btn btn-sm btn-primary"><a href="{{ route('rules.home') }}">
-        <span class="btn-title">العودة إلى القوائم الفرعية</span>
+    <button class="btn btn-sm btn-primary"><a href="{{ route('mainmenues.home') }}">
+        <span class="btn-title">العودة إلى القوائم الرئيسية</span>
         <i class="fa fa-home text-light"></i></a>
     </button>
 

@@ -36,7 +36,7 @@
                     <td>{{ ++$i }}</td>
                     <td >{{ $menu->name }}</td>
                     <td >{{ $menu->parent }}</td>
-                    <td >{{ $menu->parent }}</td>
+                    <td >{{ $menu->actions }}</td>
                     <td >{{ $menu->status ? 'مفعل' : 'معطل' }}</td>
                     <td>
                         <button type="button" class="btn text-primary ediMenuBtn"

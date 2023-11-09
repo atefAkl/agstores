@@ -21,25 +21,17 @@
 
             @csrf
             <div class="input-group mt-3">
-                <label for="name" class="input-group-text required">اسم القائمة الرئيسية:</label>
-                <input type="text" name="name" id="name" class="form-control" required value="{{ old('name') }}">
-            
+                <label for="menu_name" class="input-group-text required">اسم القائمة:</label>
+                <input type="text" name="name" id="menu_name" class="form-control" required value="">
+                <label for="menu_link" class="input-group-text required">رابط القائمة:</label>
+                <input type="text" name="menu_link" id="menu_link" class="form-control" required value="">
             </div>
             <div class="input-group mt-3">
-                <label class="input-group-text required">الحالة:</label>
-                
-                <label class="input-group-text px-3 text-center">
-                    <input type="radio" name="status" id="status_ok" class="" {{ old('status') ? 'checked':'' }} value="true">
-                </label>
-
-                <label for="status_ok" class="form-control text-right">مفعلة:</label>
-
-                <label class="input-group-text px-3 text-center">
-                    <input type="radio" name="status" id="status_stop" class="" {{ !old('status') ? 'checked':'' }} value="false">
-                </label>
-                
-                <label for="status_stop" class="form-control text-right">معطلة:</label>
-            
+                <label for="menuStatus" class="input-group-text required"> حالة التفعيل: </label>
+                <select name="status" id="menuStatus" class="form-control"  value=""> 
+                    <option value="1">مفعلة</option>
+                    <option value="0">معطلة</option>
+                </select>
             </div>
               
         

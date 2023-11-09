@@ -64,9 +64,9 @@ class SubMenuesController extends Controller
         $submenu->name         =  $request->name;
         $submenu->main_menu    =  $request->main_menu;
         $submenu->status       =  $request->status;
+        $submenu->menu_link    =  $request->menu_link;
         
         $submenu->created_by   =  auth()-> user() -> id;
-        $submenu->company      =  auth()-> user() -> company;
         $submenu->created_at   =  date('Y-m-d H:i:s');;
         
 
@@ -88,7 +88,7 @@ class SubMenuesController extends Controller
         //
         $query = SubMenu::query()
             ->select('sub_menues.*', 'main_menues.name as parentName')
-            ->join('main_menues', 'main_menues.id', '=', 'sub_menues.id')
+            ->join('main_menues', 'main_menues.id', '=', 'sub_menues.main_menu')
             ->where(['sub_menues.id'=>$id]);
         $subMenu = $query->first();
 
