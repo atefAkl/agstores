@@ -32,40 +32,7 @@
                         </legend>
                         <div class="accordion" id="rootLevel" style="position:relative;">
                             <div class="vLine" style="top: -16px; bottom: 10px"></div>
-                            @foreach($roots as $i => $root)
-                                <div class="accordion-item">
-                                    <div class="accordion-header">
-                                    <span class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#root{{$root->code}}" aria-expanded="true" aria-controls="root{{$root->code}}">
-                                        &#8211;<i class="fa fa-folder"></i></span>&#8211;<span data-id="{{ $root->id }}" data-level="{{ $root->level }}" class="ml-2 parent catItem">{{$root->e_name}}</span>
-                                    </div>
-                                    <div id="root{{$root->code}}" class="accordion-collapse collapse" data-bs-parent="#rootLevel">
-                                        <div class="accordion-body">
-                                            <div class="vLine" style="left: 19px"></div>
-                                            {{--                                Level 2 --}}
-                                            <div class="accordion" style="margin-left: 20px;" id="catsLevel">
-                                                @foreach($root->cats as $ii => $cat)
-                                                    <div class="accordion-item">
-                                                        <div class="accordion-header">
-                                                <span class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cat{{$cat->code}}" aria-expanded="true" aria-controls="cat{{$cat->code}}">
-                                                    &#8211;<i class="fa fa-folder"></i></span>&#8211;<span data-id="{{ $cat->id }}" data-level="{{ $cat->level }}" class="ml-2 parent catItem">{{$cat->e_name}}</span>
-                                                        </div>
-                                                        <div id="cat{{$cat->code}}" class="accordion-collapse collapse" data-bs-parent="#catsLevel">
-                                                            <div class="accordion-body">
-                                                                <div class="vLine" style="left: 16px"></div>
-                                                                @foreach($cat->children as $iii => $child)
-                                                                    <div class="ml-3 accordion-header">
-                                                                        &#8212;<span data-id="{{ $child->id }}" data-level="{{ $child->level }}" class="ml-2 child catItem">{{$child->e_name}}</span>
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                            
                         </div>
                     </fieldset>
                 </div>

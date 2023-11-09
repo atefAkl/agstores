@@ -24,91 +24,106 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
+
+                {{-- ----------------------- Temporary --------------------------- --}}
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            لوحة التحكم
+                            <i class="fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admins.home') }}" class="nav-link active">
+                                <i class="fa fa-home nav-icon"></i>
+                                <p> المستخدمين </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('mainmenues.home') }}" class="nav-link">
+                                <i class="fa fa-home nav-icon"></i>
+                                <p>القوائم الرئيسية</p>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="{{ route('submenues.home') }}" class="nav-link">
+                                <i class="fa fa-tag nav-icon"></i>
+                                <p> القوائم الفرعية </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('permissions.home') }}" class="nav-link">
+                                <i class="fa fa-tag nav-icon"></i>
+                                <p> الإجراءات </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('rules.home') }}" class="nav-link">
+                                <i class="fa fa-tag nav-icon"></i>
+                                <p> الأدوار </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
                 {{-- ----------------------- Accounts ---------------------------- --}}
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fa fa-th"></i>
                         <p>
-                            Accounts
-                            <i class="right fas fa-angle-left"></i>
+                            الحسابات العامة
+                            <i class="fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('accounts.home') }}" class="nav-link active">
                                 <i class="fa fa-home nav-icon"></i>
-                                <p>Accounts Tree</p>
+                                <p> الرئيسية </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('accounts.cats.home') }}" class="nav-link">
                                 <i class="fa fa-tag nav-icon"></i>
-                                <p>Accounts Categories</p>
+                                <p>تصنيفات الحسابات</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('accounts.home') }}" class="nav-link">
                                 <i class="fa fa-tag nav-icon"></i>
-                                <p>Accounts Types</p>
+                                <p>طبيعة الحسابات</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('accounts.setting') }}" class="nav-link">
                                 <i class="fa fa-tag nav-icon"></i>
-                                <p>Accounts Setting</p>
+                                <p>إعدادات المحاسبة</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('treasuries.home') }}" class="nav-link">
                                 <i class="nav-icon fa fa-ban" aria-hidden="true"></i>
                                 <p>
-                                    Treasuries
-                                    <span class="right badge badge-danger">New</span>
+                                    الخــــزن
+                                    {{-- <span class="right badge badge-danger">New</span> --}}
                                 </p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                {{-- ----------------------- Temporary --------------------------- --}}
-                <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Starter Pages
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link active">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Active Page</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('treasuries.test') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Test Page</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.dashboard.show') }}" class="nav-link">
-                                <i class="nav-icon fas fa-cogs"></i>
-                                <p>
-                                    Admin Dshboard
-                                    <span class="right badge badge-danger">New</span>
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                
                 {{-- --------------------- Store --------------------------------- --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fa fa-th"></i>
                         <p>
                             التخزين
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -157,6 +172,35 @@
 
                     </ul>
                 </li>
+
+                {{-- The application users --}}
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fa fa-th"></i>
+                        <p>
+                            المشتريات
+                            <i class="fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('vendors.home') }}" class="nav-link">
+                                <i class="fa fa-tag nav-icon"></i>
+                                <p> الموردين </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('mainmenues.home') }}" class="nav-link">
+                                <i class="fa fa-tag nav-icon"></i>
+                                <p> الضبط </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
                 {{-- ----------------------- Sales ------------------------------- --}}
                 <li
                     class="nav-item {{ request()->is('admin/sales/*')? 'menu-open':'' }}">
@@ -164,17 +208,10 @@
                         <i class="nav-icon fa fa-th"></i>
                         <p>
                             المبيعات
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('sales.home') }}" class="nav-link active">
-                                <i class="fa fa-home nav-icon"></i>
-                                <p>الرئيسية</p>
-                            </a>
-                        </li>
-
                         <li class="nav-item">
                             <a href="{{ route('items.cats.home') }}" class="nav-link">
                                 <i class="fa fa-home nav-icon"></i>
@@ -202,20 +239,16 @@
                                 <p>المنتجات والخدمات</p>
                             </a>
                         </li>
-
-
-
                     </ul>
                 </li>
 
                 {{-- ----------------------- Movements ------------------------------- --}}
-                <li
-                    class="nav-item {{ request()->is('admin/receipts/*')? 'menu-open':'' }}">
+                <li class="nav-item {{ request()->is('admin/receipts/*')? 'menu-open':'' }}">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fa fa-th"></i>
                         <p>
-                            الحركات
-                            <i class="right fas fa-angle-left"></i>
+                            التشغـــــــــــيل
+                            <i class=" fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -223,6 +256,13 @@
                             <a href="{{ route('receipts.home') }}" class="nav-link active">
                                 <i class="fa fa-home nav-icon"></i>
                                 <p> الرئيسية </p>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="{{ route('receipts.home') }}" class="nav-link">
+                                <i class="fa fa-home nav-icon"></i>
+                                <p> سندات الإدخال </p>
                             </a>
                         </li>
 
@@ -236,7 +276,14 @@
                         <li class="nav-item">
                             <a href="{{ route('clients.home') }}" class="nav-link">
                                 <i class="fa fa-tag nav-icon"></i>
-                                <p> تقارير</p>
+                                <p> استقبال</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('clients.home') }}" class="nav-link">
+                                <i class="fa fa-tag nav-icon"></i>
+                                <p> اخراج</p>
                             </a>
                         </li>
 
@@ -250,49 +297,49 @@
                         <li class="nav-item">
                             <a href="{{ route('items.home') }}" class="nav-link">
                                 <i class="fa fa-tag nav-icon"></i>
-                                <p> سجل الحركات </p>
+                                <p> سجل الحركات المحذوفة </p>
                             </a>
                         </li>
 
                     </ul>
                 </li>
 
-                {{-- --------------------- Settings --------------------------------- --}}
+                {{-- The application users --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fa fa-th"></i>
                         <p>
-                            الإعدادات
-                            <i class="right fas fa-angle-left"></i>
+                            الموارد البشرية
+                            <i class="fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('users.home') }}" class="nav-link active">
-                                <i class="fa fa-home nav-icon"></i>
-                                <p>المستخدمين</p>
-                            </a>
-                        </li>
-
 
                         <li class="nav-item">
-                            <a href="{{ route('permissions.home') }}" class="nav-link">
+                            <a href="{{ route('users.home') }}" class="nav-link">
                                 <i class="fa fa-tag nav-icon"></i>
-                                <p> الصلاحيات </p>
+                                <p> الموظفين </p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('rules.home') }}" class="nav-link">
+                            <a href="{{ route('users.home') }}" class="nav-link">
                                 <i class="fa fa-tag nav-icon"></i>
-                                <p> الأدوار </p>
+                                <p> اسماء الوظائف </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('users.home') }}" class="nav-link">
+                                <i class="fa fa-tag nav-icon"></i>
+                                <p> سير العمل </p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="{{ route('mainmenues.home') }}" class="nav-link">
                                 <i class="fa fa-tag nav-icon"></i>
-                                <p> القوائم الرئيسية </p>
+                                <p> الضبط </p>
                             </a>
                         </li>
 

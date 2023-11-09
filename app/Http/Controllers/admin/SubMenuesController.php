@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SubMenu;
 use App\Models\MainMenu;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
 class SubMenuesController extends Controller
@@ -19,13 +20,18 @@ class SubMenuesController extends Controller
      public function index()
      {
          //
-        
+         $query = SubMenu::query()
+            ->select('sub_menues.*', 'main_menues.name as parent')
+            ->join('main_menues', 'main_menues.id', '=', 'sub_menues.main_menu')
+            ->where([]);
+            
+            $submenues = $query->orderBy('id', 'ASC')->paginate(10);
  
          $vars = [
-            'rules' => $maimMenu,
+            'submenues' => $submenues,
             
          ];
-         return view ('admin.users.mainmenues.home', $vars);
+         return view ('admin.settings.submenues.home', $vars);
      }
  
      /**
@@ -33,15 +39,16 @@ class SubMenuesController extends Controller
       *
       * @return \Illuminate\Http\Response
       */
-     public function create() 
+     public function create($mainMenu) 
      {
          //
         $mms = MainMenu::all();
  
          $vars = [
-             'mainmenues'           => $mms,
+            'mainMenuId'            => $mainMenu,
+            'mainmenues'            => $mms,
          ];
-         return view ('admin.users.submenues.create', $vars);
+         return view ('admin.settings.submenues.create', $vars);
      }
  
      /**
@@ -56,11 +63,14 @@ class SubMenuesController extends Controller
         $submenu = new SubMenu ();
         $submenu->name         =  $request->name;
         $submenu->main_menu    =  $request->main_menu;
+        $submenu->status       =  $request->status;
         
         $submenu->created_by   =  auth()-> user() -> id;
         $submenu->company      =  auth()-> user() -> company;
         $submenu->created_at   =  date('Y-m-d H:i:s');;
-        $submenu->status       =  $request->status;
+        
+
+
 
         if ($submenu->save()) {
             return redirect()->back()->with(['success' => 'تم الحفظ بنجاح :)']);
@@ -73,11 +83,25 @@ class SubMenuesController extends Controller
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function show($id, $tab)
+     public function show($id)
      {
-         //
-         
- 
+        //
+        $query = SubMenu::query()
+            ->select('sub_menues.*', 'main_menues.name as parentName')
+            ->join('main_menues', 'main_menues.id', '=', 'sub_menues.id')
+            ->where(['sub_menues.id'=>$id]);
+        $subMenu = $query->first();
+
+
+        $permissions = Permission::where(['submenu_id' => $subMenu->id, 'menu_id' => $subMenu->main_menu])->get();
+        $subMenu->permissions = $permissions;
+
+        $vars = [
+            'subMenu'               => $subMenu,
+            
+         ];
+
+        return view ('admin.settings.submenues.show', $vars);
      }
  
      /**
@@ -108,20 +132,20 @@ class SubMenuesController extends Controller
      public function update(Request $request)
      {
          //
-        $submenu = SubMenu::find ($request->id);
+        $submenu = SubMenu::find ($request->menuId);
+
         if (!$submenu) {
-        return redirect()->back()->with(['error' => 'القائمة الفرعية التى تحاول تعديلها غير موجود، تأكد من أنك تمتلك كافة الصلاحيات لهذا العمل']);
+            return redirect()->back()->with(['error' => 'القائمة الفرعية التى تحاول تعديلها غير موجود، تأكد من أنك تمتلك كافة الصلاحيات لهذا العمل']);
         }
 
-        $submenu = new SubMenu ();
         $submenu->name         =  $request->name;
-        $submenu->main_menu    =  $request->main_menu;
-        
-        $submenu->created_by   =  auth()-> user() -> id;
-        $submenu->company      =  auth()-> user() -> company;
-        $submenu->created_at   =  date('Y-m-d H:i:s');;
+        $submenu->main_menu    =  $request->main_menu ? $request->main_menu : $submenu->main_menu;
         $submenu->status       =  $request->status;
-
+        
+        $submenu->updated_by   =  auth()-> user() -> id;
+        $submenu->updated_at   =  date('Y-m-d H:i:s');
+        // return $submenu;
+        
         if ($submenu->update()) {
             return redirect()->back()->with(['success' => 'تم التحديث بنجاح :)']);
         } return redirect()->back()->with(['error' => 'حدث خطأ أثناء تحديث البيانات ']);

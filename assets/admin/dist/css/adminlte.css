@@ -557,13 +557,6 @@ pre code {
   overflow-y: scroll;
 }
 
-.container {
-  width: 100%;
-  padding-right: 7.5px;
-  padding-left: 7.5px;
-  margin-right: auto;
-  margin-left: auto;
-}
 
 @media (min-width: 576px) {
   .container {
@@ -583,11 +576,6 @@ pre code {
   }
 }
 
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
-}
 
 .container-fluid {
   width: 100%;
@@ -10128,6 +10116,8 @@ body,
 
 .wrapper .content-wrapper {
   min-height: calc(100vh - calc(3.5rem + 1px) - calc(3.5rem + 1px));
+  width: 100%;
+  border: 1px solid
 }
 
 .layout-boxed .wrapper {
@@ -10262,7 +10252,7 @@ body,
 
 .layout-navbar-not-fixed .wrapper .sidebar,
 .layout-navbar-not-fixed .wrapper .content-wrapper {
-  margin-top: 0;
+  margin-top: 2rem;
 }
 
 .layout-navbar-not-fixed .wrapper .main-header {
@@ -10802,6 +10792,7 @@ body,
   .layout-xl-navbar-not-fixed .wrapper .main-header {
     position: static;
   }
+
 }
 
 .layout-footer-fixed .wrapper .control-sidebar {
@@ -10980,7 +10971,7 @@ body,
 }
 
 .content-wrapper {
-  background: #f4f6f9;
+  background: #fff;
 }
 
 .content-wrapper > .content {
@@ -11331,6 +11322,7 @@ body,
   transition: transform ease-in-out 0.3s;
   transition: transform ease-in-out 0.3s, -webkit-transform ease-in-out 0.3s;
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   .nav-sidebar .nav-item > .nav-link .right {

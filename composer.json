@@ -26,9 +26,11 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }, "files": [
+        }, 
+        
+        "files": [
             "app/Http/Helpers/general.php",
-            "app/helper.php"
+            "app/Helper.php"
         ]
     },
     "autoload-dev": {

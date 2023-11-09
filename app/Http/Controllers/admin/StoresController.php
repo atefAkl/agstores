@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\http\Controllers\info;
 use App\Models\Table;
 use App\Models\Area;
+use App\Models\Admin;
 use App\Models\StoreBox;
 use App\Models\StoreItem;
 use App\Models\SalesCategory;
@@ -15,7 +16,7 @@ class StoresController extends Controller
 {
     use info;
 
-    public function index () {
+    public function home () {
         $cats = SalesCategory::where([])->orderBy('id', 'ASC')->paginate(PAGES);
         $allAdmins = Admin::all();$admins = [];
         foreach($allAdmins as $i => $admin){$admins[$admin->id] = $admin->name;}

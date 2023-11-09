@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateMenuRequest;
 use App\Models\MainMenu;
+use App\Models\SubMenu;
 use Illuminate\Http\Request;
 
 class MainMenuesController extends Controller
@@ -18,13 +20,14 @@ class MainMenuesController extends Controller
      public function index()
      {
          //
-         $maimMenu = MainMenu::where([])->orderBy('id', 'ASC')->paginate(10);
+         $maimMenues = MainMenu::where([])->orderBy('id', 'ASC')->paginate(10);
+         foreach($maimMenues as $m => $menu) {$menu->subMenues=SubMenu::where(['main_menu' => $menu->id])->get();}
  
          $vars = [
-            'rules' => $maimMenu,
+            'mainMenues' => $maimMenues,
             
          ];
-         return view ('admin.users.mainmenues.home', $vars);
+         return view ('admin.settings.mainmenues.home', $vars);
      }
  
      /**
@@ -39,7 +42,7 @@ class MainMenuesController extends Controller
          $vars = [
              
          ];
-         return view ('admin.users.mainmenues.create', $vars);
+         return view ('admin.settings.mainmenues.create', $vars);
      }
  
      /**
@@ -93,9 +96,21 @@ class MainMenuesController extends Controller
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function update(Request $request, $id)
+     public function update(UpdateMenuRequest $req)
      {
-         //
+        //
+        $menu = MainMenu::where('id', $req->menuId)->first();
+        if ($menu->name==$req->name && $menu->status == $req->status) {
+            return redirect () -> back () -> with (['error' => 'لم تقم بإجراء أى تعديلات']);
+        } 
+        $menu->name = $req->name;
+        $menu->status = $req->status;
+
+        $menu->updated_at = date('Y-m-d H:i:s');
+        if ($menu->save()){
+            return redirect () -> back () -> with (['success' => 'تم تحديث بيانات القائمة بنجاح']);
+        }
+        return redirect () -> back () -> with (['error' => 'حدث خطأ أثناء الحفظ']);
      }
  
      /**

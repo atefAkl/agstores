@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Helper;
 use App\Models\User;
+use App\Models\Rule;
+use App\Models\UserRule;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+
+    use Helper;
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +24,9 @@ class UsersController extends Controller
     public function index()
     {
         //
-        $users = User::where([])->orderBy('id', 'ASC')->paginate(10);
-
+        $users = User::where([])->orderBy('id', 'ASC')->paginate(25);
+        foreach($users as $u => $user) {$user->profile = UserProfile::where(['userId' => $user->id])->first();}
+        
         $vars = [
             'users' => $users,
             'professions' => static::$professions
@@ -56,7 +62,7 @@ class UsersController extends Controller
 
         $user->userName         = $request->userName;
         $user->email            = $request->email;
-        $user->password         = $request->password;
+        $user->password         = bcrypt($request->password);
         $user->company          = auth()->user()->company;
         $user->created_at       = date('Ymd H:i:s');
 
@@ -79,8 +85,20 @@ class UsersController extends Controller
      */
     public function show($id, $tab)
     {
-        //
+        // return to users if the id is wrong
+        if (!User::find($id)) {
+            return redirect () -> route('users.home')->withError('لا يوجد موظفين مرتبطين بهذا الرقم التعريفى، رجاءا اختر موظفين من القائمة');
+        }
+
+        $query = UserRule::query()
+        ->select('users_rules.id', 'rules.name as name')
+        ->join('rules', 'rules.id', '=', 'users_rules.rule_id');
+    
+        $userRules = $query->get();
+        
         $vars = [
+            'userRules' => $userRules,
+            'rules' => Rule::all(),
             'user' => User::find($id),
             'profile' => UserProfile::where(['userId' => $id])->first(),
             'professions' => static::$professions,
@@ -95,11 +113,33 @@ class UsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function edit($id)
     {
         //
+    }
+
+    public function addRules (Request $req)
+    {   
+        //
+        $userRule = new UserRule();
+
+        $userRule->user_id      = $req->user_id;
+        
+        $userRule->rule_id      = $req->rule_id;
+        
+        $userRule->created_by   = auth()->user()->id;
+        
+        $userRule->created_at   = date('Y-m-d H:i:s');
+        
+        $userRule->company      = auth()->user()->company;
+        
+        if  ($userRule->save()) {
+
+            return redirect() -> back() -> with(['success' => 'تمت إضافة الدور للمستخدم بنجاح.']) ;
+
+        } return redirect() -> back() -> with(['error' => 'لم تتم إضافة الدور للمستخدم بسبب حدوث خطأ. نرجو مراجعة مدير التطبيق.']) ;
     }
 
     /**

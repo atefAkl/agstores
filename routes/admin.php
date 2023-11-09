@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\StoresController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\ReceiptsController;
 use App\Http\Controllers\Admin\ReceiptEntriesController;
 use App\Http\Controllers\Admin\SalesController;
@@ -23,10 +24,11 @@ use App\Http\Controllers\Admin\ContractsController;
 use App\Http\Controllers\Admin\TablesController;
 use App\Http\Controllers\Admin\RoomsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\VendorsController;
 use App\Http\Controllers\Admin\RulesController;
 use App\Http\Controllers\Admin\MainMenuesController;
 use App\Http\Controllers\Admin\SubMenuesController;
-use App\Http\Controllers\Admin\PermissionRulesController;
+use App\Http\Controllers\Admin\PermissionsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -151,12 +153,31 @@ Route::group([
     Route::get('/users/show/{id}/{t}',                          [UsersController::class, 'show'])->name('users.show');
     Route::get('/users/edit/{id}',                              [UsersController::class, 'edit'])->name('users.edit');
     Route::put('/users/update/',                                [UsersController::class, 'update'])->name('users.update');
+    Route::post('/users/rules/add',                             [UsersController::class, 'addRules'])->name('users.add.rules');
     Route::put('/users/profile/update',                         [UsersController::class, 'updateProfile'])->name('users.profiles.update');
     Route::get('/users/delete/{id}',                            [UsersController::class, 'delete'])->name('users.delete');
 ################################### GENERAL SETTINGS GENERAL SETTINGS || GENERAL SETTINGS GENERAL SETTINGS ######################################################################################################################################
 
 ################################### GENERAL SETTINGS GENERAL SETTINGS || GENERAL SETTINGS GENERAL SETTINGS ######################################################################################################################################
-    Route::get('/permission/home',                              [PermissionRolesController::class, 'index'])->name('permissions.home');
+    //Route::get('/receipts/home',                                    [ReceiptEntriesController::class, 'index'])->name('receipts.home');
+    Route::get('/admins/home',                                   [AdminsController::class, 'index'])->name('admins.home');
+    Route::get('/admins/create',                                 [AdminsController::class, 'create'])->name('admins.create');
+    Route::post('/admins/store',                                 [AdminsController::class, 'store'])->name('admins.store');
+    Route::get('/admins/show/{id}/{t}',                          [AdminsController::class, 'show'])->name('admins.show');
+    Route::get('/admins/edit/{id}',                              [AdminsController::class, 'edit'])->name('admins.edit');
+    Route::put('/admins/update/',                                [AdminsController::class, 'update'])->name('admins.update');
+    Route::post('/admins/rules/add',                             [AdminsController::class, 'addRules'])->name('admins.add.rules');
+    Route::put('/admins/profile/update',                         [AdminsController::class, 'updateProfile'])->name('admins.profiles.update');
+    Route::get('/admins/delete/{id}',                            [AdminsController::class, 'delete'])->name('admins.delete');
+################################### GENERAL SETTINGS GENERAL SETTINGS || GENERAL SETTINGS GENERAL SETTINGS ######################################################################################################################################
+
+################################### GENERAL SETTINGS GENERAL SETTINGS || GENERAL SETTINGS GENERAL SETTINGS ######################################################################################################################################
+    Route::get('/permissions/home',                              [PermissionsController::class, 'index'])->name('permissions.home');
+    Route::get('/permissions/create/{mm}/{sm}',                  [PermissionsController::class, 'create'])->name('permissions.create');
+    Route::get('/permissions/edit/{id}',                         [PermissionsController::class, 'edit'])->name('permissions.edit');
+    Route::get('/permissions/destroy/{id}',                      [PermissionsController::class, 'destroy'])->name('permissions.destroy');
+    Route::post('/permissions/store',                            [PermissionsController::class, 'store'])->name('permissions.store');
+    Route::post('/permissions/update',                           [PermissionsController::class, 'update'])->name('permissions.update');
 ################################### GENERAL SETTINGS GENERAL SETTINGS || GENERAL SETTINGS GENERAL SETTINGS ######################################################################################################################################
 
 ################################### GENERAL SETTINGS RULES GENERAL SETTINGS RULES || GENERAL SETTINGS RULES GENERAL SETTINGS RULES ######################################################################################################################################
@@ -165,6 +186,7 @@ Route::group([
     Route::post('/rules/store',                                 [RulesController::class, 'store'])->name('rules.store');
     Route::get('/rules/edit/{id}',                              [RulesController::class, 'edit'])->name('rules.edit');
     Route::post('/rules/update',                                [RulesController::class, 'update'])->name('rules.update');
+    Route::post('/rules/addmenu',                               [RulesController::class, 'addMenuToRule'])->name('rules.add.menu');
     Route::get('/rules/show/{id}',                              [RulesController::class, 'show'])->name('rules.show');
     Route::get('/rules/delete/{id}',                            [RulesController::class, 'destroy'])->name('rules.delete');
 ################################### GENERAL SETTINGS RULES GENERAL SETTINGS RULES || GENERAL SETTINGS RULES GENERAL SETTINGS RULES ######################################################################################################################################
@@ -172,8 +194,8 @@ Route::group([
 ################################### GENERAL SETTINGS MENUES GENERAL SETTINGS MENUES || GENERAL SETTINGS MENUES GENERAL SETTINGS MENUES ######################################################################################################################################
     Route::get('/mainmenues/home',                               [MainMenuesController::class, 'index'])->name('mainmenues.home');
     Route::get('/mainmenues/create',                             [MainMenuesController::class, 'create'])->name('mainmenues.create');
-    Route::post('/mainmenues/store',                             [MainMenuesController::class, 'store'])->name('mainmenues.store');
     Route::get('/mainmenues/edit/{id}',                          [MainMenuesController::class, 'edit'])->name('mainmenues.edit');
+    Route::post('/mainmenues/store',                             [MainMenuesController::class, 'store'])->name('mainmenues.store');
     Route::post('/mainmenues/update',                            [MainMenuesController::class, 'update'])->name('mainmenues.update');
     Route::get('/mainmenues/delete/{id}',                        [MainMenuesController::class, 'destroy'])->name('mainmenues.destroy');
 ################################### GENERAL SETTINGS MENUES GENERAL SETTINGS MENUES || GENERAL SETTINGS MENUES GENERAL SETTINGS MENUES ######################################################################################################################################
@@ -181,7 +203,8 @@ Route::group([
 
 ################################### GENERAL SETTINGS SUBMENUES GENERAL SETTINGS SUBMENUES || GENERAL SETTINGS SUBMENUES GENERAL SETTINGS SUBMENUES ######################################################################################################################################
     Route::get('/submenues/home',                               [SubMenuesController::class, 'index'])->name('submenues.home');
-    Route::get('/submenues/create',                             [SubMenuesController::class, 'create'])->name('submenues.create');
+    Route::get('/submenues/show/{id}',                          [SubMenuesController::class, 'show'])->name('submenues.show');
+    Route::get('/submenues/create/{mm}',                        [SubMenuesController::class, 'create'])->name('submenues.create');
     Route::post('/submenues/store',                             [SubMenuesController::class, 'store'])->name('submenues.store');
     Route::get('/submenues/edit/{id}',                          [SubMenuesController::class, 'edit'])->name('submenues.edit');
     Route::post('/submenues/update',                            [SubMenuesController::class, 'update'])->name('submenues.update');
@@ -218,7 +241,7 @@ Route::group([
     Route::post('/accounts/cats/update',                    [AccountsCategoriesController::class, 'update'])->name('accounts.cats.update');
     Route::get('/accounts/cats/delete/{id}',                [AccountsCategoriesController::class, 'delete'])->name('accounts.cats.delete');
 
-    //Account
+//Account
     Route::get('/clients/home',                             [ClientsController::class, 'index'])->name('clients.home');
     Route::get('/clients/create',                           [ClientsController::class, 'create'])->name('clients.create');
     Route::post('/clients/store',                           [ClientsController::class, 'store'])->name('clients.store');
@@ -227,6 +250,16 @@ Route::group([
     Route::post('/clients/update',                          [ClientsController::class, 'update'])->name('clients.update');
     Route::get('/clients/delete/{id}',                      [ClientsController::class, 'delete'])->name('clients.delete');
     Route::get('/clients/status/{id}',                      [ClientsController::class, 'status'])->name('clients.status');
+    
+// Vendors
+    Route::get('/vendors/home',                             [VendorsController::class, 'index'])->name('vendors.home');
+    Route::get('/vendors/create',                           [VendorsController::class, 'create'])->name('vendors.create');
+    Route::post('/vendors/store',                           [VendorsController::class, 'store'])->name('vendors.store');
+    Route::get('/vendors/view/{id}',                        [VendorsController::class, 'view'])->name('vendors.view');
+    Route::get('/vendors/edit/{id}',                        [VendorsController::class, 'edit'])->name('vendors.edit');
+    Route::post('/vendors/update',                          [VendorsController::class, 'update'])->name('vendors.update');
+    Route::get('/vendors/delete/{id}',                      [VendorsController::class, 'delete'])->name('vendors.delete');
+    Route::get('/vendors/status/{id}',                      [VendorsController::class, 'status'])->name('vendors.status');
 
     // Tables
     Route::get('/tables/home',                              [TablesController::class, 'home'])->name('tables.home');
